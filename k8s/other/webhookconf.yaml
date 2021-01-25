@@ -1,12 +1,12 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: "hello-webhook.leclouddev.com"
+  name: "mutating-webhook.cincomcloud.com"
 webhooks:
-- name: "hello-webhook.leclouddev.com"
+- name: "mutating-webhook.cincomcloud.com"
   objectSelector:
     matchLabels:    
-      hello: "true"
+      mutate: "true"
   rules:
   - apiGroups:   [""]
     apiVersions: ["v1"]
@@ -16,7 +16,7 @@ webhooks:
   clientConfig:
     service:
       namespace: "default"
-      name: "hello-webhook-service"  
+      name: "mutating-webhook-service"  
       path: /mutate
   admissionReviewVersions: ["v1", "v1beta1"]
   sideEffects: None

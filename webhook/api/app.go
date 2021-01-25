@@ -32,11 +32,11 @@ func (app *App) HandleMutate(w http.ResponseWriter, r *http.Request) {
 
 	// add the volume to the pod
 	pod.Spec.Volumes = append(pod.Spec.Volumes, corev1.Volume{
-		Name: "hello-volume",
+		Name: "mutating-volume",
 		VolumeSource: corev1.VolumeSource{
 			ConfigMap: &corev1.ConfigMapVolumeSource{
 				LocalObjectReference: corev1.LocalObjectReference{
-					Name: "hello-configmap",
+					Name: "mutating-configmap",
 				},
 			},
 		},
@@ -45,7 +45,7 @@ func (app *App) HandleMutate(w http.ResponseWriter, r *http.Request) {
 	// add volume mount to all containers in the pod
 	for i := 0; i < len(pod.Spec.Containers); i++ {
 		pod.Spec.Containers[i].VolumeMounts = append(pod.Spec.Containers[i].VolumeMounts, corev1.VolumeMount{
-			Name:      "hello-volume",
+			Name:      "mutating-volume",
 			MountPath: "/etc/config",
 		})
 	}
@@ -66,7 +66,7 @@ func (app *App) HandleMutate(w http.ResponseWriter, r *http.Request) {
 	patch := []JSONPatchEntry{
 		JSONPatchEntry{
 			OP:    "add",
-			Path:  "/metadata/labels/hello-added",
+			Path:  "/metadata/labels/mutating-added",
 			Value: []byte(`"OK"`),
 		},
 		JSONPatchEntry{

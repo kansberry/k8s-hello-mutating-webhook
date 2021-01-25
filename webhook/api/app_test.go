@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/didil/k8s-hello-mutating-webhook/webhook/api"
+	"github.com/kansberry/k8s-hello-mutating-webhook/webhook/api"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -77,7 +77,7 @@ func (suite *AppTestSuite) Test_HandleMutate_Ok() {
 			  },
 			  "managedFields": [
 				{
-				  "manager": "kubectl",
+				  "manager": "microk8s kubectl",
 				  "operation": "Update",
 				  "apiVersion": "v1",
 				  "time": "2020-10-01T15:39:15Z",
@@ -201,5 +201,5 @@ func (suite *AppTestSuite) Test_HandleMutate_Ok() {
 	respBody, err := ioutil.ReadAll(resp.Body)
 	suite.NoError(err)
 
-	suite.Equal(`{"kind":"AdmissionReview","apiVersion":"admission.k8s.io/v1","response":{"uid":"922a00bc-ba06-494e-bb48-b0928658f9ce","allowed":true,"patch":"W3sib3AiOiJhZGQiLCJwYXRoIjoiL21ldGFkYXRhL2xhYmVscy9oZWxsby1hZGRlZCIsInZhbHVlIjoiT0sifSx7Im9wIjoicmVwbGFjZSIsInBhdGgiOiIvc3BlYy9jb250YWluZXJzIiwidmFsdWUiOlt7Im5hbWUiOiJidXN5Ym94IiwiaW1hZ2UiOiJidXN5Ym94IiwiYXJncyI6WyJzbGVlcCIsIjM2MDAiXSwicmVzb3VyY2VzIjp7fSwidm9sdW1lTW91bnRzIjpbeyJuYW1lIjoiZGVmYXVsdC10b2tlbi1rNWxsbSIsInJlYWRPbmx5Ijp0cnVlLCJtb3VudFBhdGgiOiIvdmFyL3J1bi9zZWNyZXRzL2t1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQifSx7Im5hbWUiOiJoZWxsby12b2x1bWUiLCJtb3VudFBhdGgiOiIvZXRjL2NvbmZpZyJ9XSwidGVybWluYXRpb25NZXNzYWdlUGF0aCI6Ii9kZXYvdGVybWluYXRpb24tbG9nIiwidGVybWluYXRpb25NZXNzYWdlUG9saWN5IjoiRmlsZSIsImltYWdlUHVsbFBvbGljeSI6IkFsd2F5cyJ9XX0seyJvcCI6InJlcGxhY2UiLCJwYXRoIjoiL3NwZWMvdm9sdW1lcyIsInZhbHVlIjpbeyJuYW1lIjoiZGVmYXVsdC10b2tlbi1rNWxsbSIsInNlY3JldCI6eyJzZWNyZXROYW1lIjoiZGVmYXVsdC10b2tlbi1rNWxsbSJ9fSx7Im5hbWUiOiJoZWxsby12b2x1bWUiLCJjb25maWdNYXAiOnsibmFtZSI6ImhlbGxvLWNvbmZpZ21hcCJ9fV19XQ==","patchType":"JSONPatch"}}`, string(respBody))
+	suite.Equal(`{"kind":"AdmissionReview","apiVersion":"admission.k8s.io/v1","response":{"uid":"922a00bc-ba06-494e-bb48-b0928658f9ce","allowed":true,"patch":"W3sib3AiOiJhZGQiLCJwYXRoIjoiL21ldGFkYXRhL2xhYmVscy9tdXRhdGluZy1hZGRlZCIsInZhbHVlIjoiT0sifSx7Im9wIjoicmVwbGFjZSIsInBhdGgiOiIvc3BlYy9jb250YWluZXJzIiwidmFsdWUiOlt7Im5hbWUiOiJidXN5Ym94IiwiaW1hZ2UiOiJidXN5Ym94IiwiYXJncyI6WyJzbGVlcCIsIjM2MDAiXSwicmVzb3VyY2VzIjp7fSwidm9sdW1lTW91bnRzIjpbeyJuYW1lIjoiZGVmYXVsdC10b2tlbi1rNWxsbSIsInJlYWRPbmx5Ijp0cnVlLCJtb3VudFBhdGgiOiIvdmFyL3J1bi9zZWNyZXRzL2t1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQifSx7Im5hbWUiOiJtdXRhdGluZy12b2x1bWUiLCJtb3VudFBhdGgiOiIvZXRjL2NvbmZpZyJ9XSwidGVybWluYXRpb25NZXNzYWdlUGF0aCI6Ii9kZXYvdGVybWluYXRpb24tbG9nIiwidGVybWluYXRpb25NZXNzYWdlUG9saWN5IjoiRmlsZSIsImltYWdlUHVsbFBvbGljeSI6IkFsd2F5cyJ9XX0seyJvcCI6InJlcGxhY2UiLCJwYXRoIjoiL3NwZWMvdm9sdW1lcyIsInZhbHVlIjpbeyJuYW1lIjoiZGVmYXVsdC10b2tlbi1rNWxsbSIsInNlY3JldCI6eyJzZWNyZXROYW1lIjoiZGVmYXVsdC10b2tlbi1rNWxsbSJ9fSx7Im5hbWUiOiJtdXRhdGluZy12b2x1bWUiLCJjb25maWdNYXAiOnsibmFtZSI6Im11dGF0aW5nLWNvbmZpZ21hcCJ9fV19XQ==","patchType":"JSONPatch"}}`, string(respBody))
 }

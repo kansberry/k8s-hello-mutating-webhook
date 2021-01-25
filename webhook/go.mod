@@ -1,4 +1,4 @@
-module github.com/didil/k8s-hello-mutating-webhook/webhook
+module github.com/kansberry/k8s-hello-mutating-webhook/webhook
 
 go 1.15
 
